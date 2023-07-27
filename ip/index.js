@@ -1,26 +1,34 @@
 //axios import buraya gelecek
+import axios from "axious";
 
 var benimIP;
-
 
 // ------------ değiştirmeyin --------------
 // licensed to Ergineer 2022
 require("babel-core/register");
 require("babel-polyfill");
-async function ipAdresimiAl(){
-	await axios({
-		method: 'get',
-		url: 'https://apis.ergineer.com/ipadresim',
-	})
-	.then(function (response) {
-		return response.data
-	})
-	.then(function (a) {
-		benimIP=a
-	});
-}				
+
+async function ipAdresimiAl() {
+  await axios({
+    method: "get",
+    url: "https://apis.ergineer.com/ipadresim",
+  })
+    .then(function (response) {
+      return response.data;
+    })
+    .then(function (a) {
+      benimIP = a;
+    });
+}
 // ------------ değiştirmeyin --------------
 
+const getIP = async function () {
+  const IPm = await axios.get(
+    "https://apis.ergineer.com/ipgeoapi/195.142.68.7"
+  );
+  console.log("async / await le gelen data > ", IPm.data);
+};
+getIP();
 
 /*
 	ADIM 1: axios kullanarak, aşağıdaki URL'ye GET sorgusu atacağız
@@ -36,6 +44,51 @@ async function ipAdresimiAl(){
 	iyice anlamanız gerekmektedir.
 	
 */
+
+const myFunction = function (nesne) {
+  const ilkDiv = document.createElement("div");
+  ilkDiv.className = "card";
+
+  const foto = document.createElement("img");
+  foto.setAttribute("src", "{ülke bayrağı url}????????????????");
+
+  const ikinciDiv = document.createElement("div");
+  ikinciDiv.className = "card-info";
+
+  const baslik = document.createElement("h3");
+  baslik.className = "ip";
+  baslik.textContent = "{ip adresi}?????????????????";
+
+  const pUlke = document.createElement("p");
+  pUlke.className = "ulke";
+  pUlke.textContent = "{ülke bilgisi (ülke kodu)}????????????????";
+
+  const pEnlemBoylam = document.createElement("p");
+  pEnlemBoylam.textContent =
+    "Enlem: {enlem} Boylam: {boylam}???????????????????";
+
+  const pSehir = document.createElement("p");
+  pSehir.textContent = "Şehir: {şehir}????????????????";
+
+  const pSaat = document.createElement("p");
+  pSaat.textContent = "Saat dilimi: {saat dilimi}????????????????????";
+
+  const pPara = document.createElement("p");
+  pPara.textContent = "Para birimi: {para birimi}?????????????????";
+
+  const pISP = document.createElement("p");
+  pISP.textContent = "ISP: {isp}?????????????????????????????";
+
+  ikinciDiv.append(baslik, pUlke, pEnlemBoylam, pSehir, pSaat, pPara, pISP);
+  ilkDiv.append(foto, ikinciDiv);
+
+  return ilkDiv;
+};
+
+const buDiv = document.querySelector(".card");
+const haberHaber = myFunction();
+buDiv.append(haberHaber);
+
 /*
 	ADIM 3: Argümanı sadece 1 nesne kabül eden bir fonksiyon oluşturun.
     DOM metotlarını ve özelliklerini kullanarak, şunları gerçekleştirin:
@@ -66,7 +119,5 @@ async function ipAdresimiAl(){
 	bilgisayarınızın IP adresini atayacaktır. 
 	Örnek dinamik URL kullanımı: var url = "https://apis.ergineer.com/ipgeoapi/"+benimIP; 
 */
-
-
 
 //kodlar buraya gelecek
