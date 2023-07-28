@@ -1,12 +1,12 @@
 //axios import buraya gelecek
-import axios from "axious";
+import axios from "axios";
 
 var benimIP;
 
 // ------------ değiştirmeyin --------------
 // licensed to Ergineer 2022
-require("babel-core/register");
-require("babel-polyfill");
+import "babel-core/register";
+import "babel-polyfill";
 
 async function ipAdresimiAl() {
   await axios({
@@ -30,6 +30,44 @@ const getIP = async function () {
 };
 getIP();
 
+const responseStatic = {
+  sorgu: "195.142.68.7",
+  durum: "OK",
+  kıta: "Asia",
+  ülke: "Turkey",
+  ülkeKodu: "TR",
+  ülkebayrağı: "https://apis.ergineer.com/ulkebayraklari/TR",
+  bölge: "16",
+  bölgeAdı: "Bursa Province",
+  şehir: "Bursa",
+  zip: "16250",
+  enlem: 40.22619999999999862438926356844604015350341796875,
+  boylam: 29.0722999999999984765963745303452014923095703125,
+  saatdilimi: "Europe/Istanbul",
+  parabirimi: "TRY",
+  isp: "Superonline Iletisim Hizmetleri",
+  organizasyon: "BNG-SOL",
+  as: "AS34984 Superonline Iletisim Hizmetleri A.S.",
+};
+
+const cardCreator = (data) => {
+  const card = `<div class="card">
+<img src="https://flagsapi.com/${data["ülkeKodu"]}/flat/64.png" />
+<div class="card-info">
+  <h3 class="ip">${data["sorgu"]}</h3>
+  <p class="ulke">${data["ülkeKodu"]}</p>
+  <p>Enlem: ${data["enlem"]} Boylam: ${data["boylam"]}</p>
+  <p>Şehir: ${data["şehir"]}</p>
+  <p>Saat dilimi: ${data["saatdilimi"]}</p>
+  <p>Para birimi: ${data["parabirimi"]}</p>
+  <p>ISP: ${data["isp"]}</p>
+</div>
+  </div>`;
+  return card;
+};
+
+document.querySelector(".cards").innerHTML = cardCreator(responseStatic);
+
 /*
 	ADIM 1: axios kullanarak, aşağıdaki URL'ye GET sorgusu atacağız
     (tag içindeki yere kendi ipnizi yazarak URL'yi oluşturun):
@@ -44,50 +82,6 @@ getIP();
 	iyice anlamanız gerekmektedir.
 	
 */
-
-const myFunction = function (nesne) {
-  const ilkDiv = document.createElement("div");
-  ilkDiv.className = "card";
-
-  const foto = document.createElement("img");
-  foto.setAttribute("src", "{ülke bayrağı url}????????????????");
-
-  const ikinciDiv = document.createElement("div");
-  ikinciDiv.className = "card-info";
-
-  const baslik = document.createElement("h3");
-  baslik.className = "ip";
-  baslik.textContent = "{ip adresi}?????????????????";
-
-  const pUlke = document.createElement("p");
-  pUlke.className = "ulke";
-  pUlke.textContent = "{ülke bilgisi (ülke kodu)}????????????????";
-
-  const pEnlemBoylam = document.createElement("p");
-  pEnlemBoylam.textContent =
-    "Enlem: {enlem} Boylam: {boylam}???????????????????";
-
-  const pSehir = document.createElement("p");
-  pSehir.textContent = "Şehir: {şehir}????????????????";
-
-  const pSaat = document.createElement("p");
-  pSaat.textContent = "Saat dilimi: {saat dilimi}????????????????????";
-
-  const pPara = document.createElement("p");
-  pPara.textContent = "Para birimi: {para birimi}?????????????????";
-
-  const pISP = document.createElement("p");
-  pISP.textContent = "ISP: {isp}?????????????????????????????";
-
-  ikinciDiv.append(baslik, pUlke, pEnlemBoylam, pSehir, pSaat, pPara, pISP);
-  ilkDiv.append(foto, ikinciDiv);
-
-  return ilkDiv;
-};
-
-const buDiv = document.querySelector(".card");
-const haberHaber = myFunction();
-buDiv.append(haberHaber);
 
 /*
 	ADIM 3: Argümanı sadece 1 nesne kabül eden bir fonksiyon oluşturun.
