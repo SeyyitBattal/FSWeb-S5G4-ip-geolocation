@@ -68,6 +68,27 @@ const cardCreator = (data) => {
 
 document.querySelector(".cards").innerHTML = cardCreator(responseStatic);
 
+//BUNDAN SONRASI DİNAMİK IP ALMA
+
+async function geoAPI() {
+  await ipAdresimiAl();
+  console.log("IP adresim", benimIP);
+  axios
+    .get(`https://apis.ergineer.com/ipgeoapi/${benimIP}`)
+    .then(function (response) {
+      console.log("2. IP adresim: ", benimIP);
+      console.log(response.data);
+      document.querySelector(".cards").innerHTML = cardCreator(response.data);
+    })
+    .catch(function (response) {
+      console.error("Hata alındı.");
+    })
+    .finally(function () {
+      console.log("3. IP adresim: ", benimIP);
+    });
+}
+geoAPI();
+
 /*
 	ADIM 1: axios kullanarak, aşağıdaki URL'ye GET sorgusu atacağız
     (tag içindeki yere kendi ipnizi yazarak URL'yi oluşturun):
